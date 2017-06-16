@@ -23,8 +23,10 @@ host: 'localhost'  //Change to '0.0.0.0' for external facing server
 ```
 
 Now compile the Advpl file in your Protheus environment and run `U_REACT` 
+
 ![SmartClient](http://i.imgur.com/HmBn1wK.png)
 
 You will see something like this:
+
 ![The magic](http://i.imgur.com/rnF5sjc.png)
 
