@@ -4,40 +4,19 @@
 Exemplo para montagem de um componente hibrido AdvPL/HTML
 /-------------------------------------------------------------------*/
 User function React()
-local i, oDlg, cFile, nHandle, globalLink
-local aFiles := {"bootstrap.min.css",;
-				"jquery-1.10.2.min.js",;
-				"totvstec.js",;
-				"style.css",;
-				"component.html",;
-				"img_avatar1.png",;
-				"img_avatar2.png",;
-				"img_avatar3.png",;
-				"img_avatar4.png",;
-				"img_avatar5.png",;
-				"img_avatar6.png"}
-private tempPath := 'C:\Temp\handson\fontes\react\build\'//GetTempPath()
-private oWebChannel, oMultGet, oCompHTML
-Private nItem := 0
+	Local i, oDlg, globalLink
+	Private oWebChannel, oCompHTML
+	Private nItem := 0
 
-oDlg := TWindow():New(10, 10, 800, 600, "TOTVS - Demonstracao de componente Hibrido")
-oDlg:setCss("QPushButton{borderDummy: 1px solid black;}")
+	oDlg := TWindow():New(10, 10, 800, 600, "TOTVS - Demonstração React + Advpl")
+		oDlg:setCss("QPushButton{borderDummy: 1px solid black;}")
 
     // [Android] retorna mesmo tipo do Linux
-    if GetRemoteType() == 2
+    If GetRemoteType() == 2
     	oMobile := TMobile():New()
     	oMobile:SetScreenOrientation(-1)
-    	tempPath := oMobile:GetTempPath() + "/"
-    endif             
-/*
-	// Baixa arquivos HTML do RPO no TEMP
-	for i := 1 to len(aFiles)
-		cFile :=  + aFiles[i]
-		nHandle := fCreate(tempPath+cFile)
-		fWrite(nHandle, getApoRes(aFiles[i]))
-        fClose(nHandle)
-	next i
-*/	
+    EndIf
+
 	// Painel de botoes
     @ 000, 000 MSPANEL pLeft SIZE 092, 400 OF oDlg COLORS 0, 16777215 RAISED
     @ 000, 000 BUTTON oButton2 PROMPT "Abre Janela" SIZE 091, 012 OF pLeft PIXEL; 
@@ -68,7 +47,6 @@ oDlg:setCss("QPushButton{borderDummy: 1px solid black;}")
 	
 	// Componente que sera utilizado como Navegador embutido
 	oCompHTML := TWebEngine():New(oDlg, 0, 0, 100, 100)
-		
 		oCompHTML:navigate(globalLink)
     
     pLeft:Align := CONTROL_ALIGN_LEFT
@@ -88,7 +66,6 @@ static function jsToAdvpl(self,codeType,codeContent)
 	// Exibe mensagens trocadas
 	conout("jsToAdvpl->codeType: " + codeType +chr(10)+;
 		   "jsToAdvpl->codeContent: " + codeContent)
-			
 
 	// Termino da carga da pagina HTML
 	if codeType == "pageStarted"
@@ -98,10 +75,8 @@ static function jsToAdvpl(self,codeType,codeContent)
 	
 return
 
-
 Static Function OpenWindow()
 Return oWebChannel:advplToJs("OpenWindow", "")
-
 
 Static Function CloseWindow()
 Return oWebChannel:advplToJs("CloseWindow", "")
@@ -110,5 +85,4 @@ Static Function AddItem()
 	Local cItem := cValToChar(nItem)
 	Local cJson := '{"item": "'+cItem+'", "name": "Item '+cItem+'" }'
 	nItem++
-	oWebChannel:advplToJs("AddItem", cJson)
-Return
+Return oWebChannel:advplToJs("AddItem", cJson)
