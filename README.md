@@ -21,4 +21,10 @@ Note: To allow external viewing of the demo, change the following value in `webp
 ```
 host: 'localhost'  //Change to '0.0.0.0' for external facing server
 ```
+
 Now compile the Advpl file in your Protheus environment and run `U_REACT` 
+[Imgur](http://i.imgur.com/HmBn1wK.png)
+
+You will see something like this:
+[Imgur](http://i.imgur.com/rnF5sjc.png)
+
